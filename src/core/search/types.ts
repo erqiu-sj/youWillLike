@@ -5,17 +5,15 @@
  * @FilePath     : /you-will-like/src/core/search/types.ts
  * @Description  : search Types
  */
-import {Map} from "immutable";
-import {SearchHandler} from "./search";
+import { SearchHandler } from './search'
 
 export interface diyHandlerTypes<T extends object, V, R> {
-    add: (key: string, val: V) => SearchHandler<T>
+  add: (key: string, val: V) => SearchHandler<T>
 
-    edit: (key: string, val: R) => SearchHandler<T>
+  edit: (key: string, val: R) => SearchHandler<T>
 
-    delete: (key: string) => SearchHandler<T>
+  delete: (key: string) => SearchHandler<T>
 }
-
 
 /**
  * @description 定义搜索函数的抽象方法
@@ -25,23 +23,20 @@ export interface diyHandlerTypes<T extends object, V, R> {
  */
 export type initializationTypes<T> = () => T | T
 
-
 export abstract class searchAbstract<T extends object> {
+  abstract initialization(val: initializationTypes<T>): this // 初始化字段
 
-    abstract initialization(val: initializationTypes<T>): this; // 初始化字段
+  abstract resetField(val?: T): this // 清除字段
 
-    abstract resetField(val?: T): this; // 清除字段
+  abstract registerHandler(key: string, fn: (params: diyHandlerTypes<T, unknown, unknown>) => void): this // 添加对某一字段的处理函数
 
-    abstract registerHandler(key: string, fn: (params: diyHandlerTypes<T , unknown, unknown>) => void): this; // 添加对某一字段的处理函数
+  abstract transferHandler(key: string): this // 调用自定义的处理函数
 
-    abstract transferHandler(key: string): this; // 调用自定义的处理函数
+  abstract rewriteField<R>(key: string, val: R): this // 重写某字段值
 
-    abstract rewriteField<R>(key: string, val: R): this; // 重写某字段值
+  abstract addNewField<V>(key: string, val: V): this // 新增字段
 
-    abstract addNewField<V>(key: string, val: V): this; // 新增字段
+  abstract deleteField(key: string): this // 删除字段
 
-    abstract deleteField(key: string): this // 删除字段
-
-    abstract returnParams(): T
+  abstract returnParams(): T
 }
-
