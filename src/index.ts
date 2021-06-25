@@ -1,7 +1,7 @@
-import { SearchHandler } from './core/search'
-import type { searchAbstract } from './core/search'
+import { SearchHandler } from "./core/search";
+import type { searchAbstract } from "./core/search";
 
-import { FormDataHandler } from './core/formData'
+import { FormDataHandler } from "./core/formData";
 
-export { SearchHandler, FormDataHandler }
-export type { searchAbstract }
+export { SearchHandler, FormDataHandler };
+export type { searchAbstract };

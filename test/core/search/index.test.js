@@ -1,19 +1,20 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-06-25 19:06:44
- * @LastEditTime : 2021-06-25 19:56:39
- * @FilePath     : /you-will-like/test/core/search/index.test.js
+ * @LastEditTime: 2021-06-26 00:16:02
+ * @FilePath: /you-will-like/test/core/search/index.test.js
  * @Description  :
  */
-const { SearchHandler } = require('../../../dist')
-
-test('search', () => {
+const { SearchHandler } = require("../../../dist");
+const realSearch = new SearchHandler({});
+realSearch.registerHandler("editId", function ({ add, value }) {
+  add("id", value);
+});
+realSearch.transferHandler("editId", 1);
+test("search", () => {
   expect(
-    new SearchHandler({ job: 1 })
-      .addNewField('iLike', 2)
-      .initialization(() => ({ job: 1 }))
-      .addNewField('iLike', 2)
-      .rewriteField('job', 2)
-      .returnParams()
-  ).toStrictEqual({ job: 2, iLike: 2 })
-})
+    realSearch.addNewField("job", 1).deleteField("id").returnParams()
+  ).toStrictEqual({
+    job: 1,
+  });
+});
