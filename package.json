@@ -17,9 +17,7 @@
   ],
   "author": "hooks28",
   "license": "MIT",
-  "dependencies": {
-    "immutable": "^4.0.0-rc.12"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^27.0.5"
   }
