@@ -8,5 +8,5 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchHandler = void 0;
-var search_1 = require("./search");
+const search_1 = require("./search");
 Object.defineProperty(exports, "SearchHandler", { enumerable: true, get: function () { return search_1.SearchHandler; } });
