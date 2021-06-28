@@ -1,3 +1,11 @@
+/*
+ * @Author       : 邱狮杰
+ * @Date         : 2021-06-25 12:06:43
+ * @LastEditTime : 2021-06-28 11:27:45
+ * @FilePath     : /you-will-like/src/core/formData/formData.ts
+ * @Description  : formData
+ */
+
 import { formDataAbstract } from './types'
 
 export class FormDataHandler implements formDataAbstract {
@@ -37,5 +45,9 @@ export class FormDataHandler implements formDataAbstract {
   forEach(callbackFn: (value: FormDataEntryValue, key: string, parent: FormData) => void, thisArg?: any): this {
     this.formData.forEach(callbackFn, thisArg)
     return this
+  }
+
+  return(): FormData {
+    return this.formData
   }
 }
