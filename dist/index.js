@@ -4,8 +4,8 @@ exports.base64 = exports.Strategist = exports.FormDataHandler = exports.SearchHa
 /*
  * @Author: 邱狮杰
  * @Date: 2021-06-25 22:57:06
- * @LastEditTime: 2021-06-27 12:27:42
- * @FilePath: /you-will-like/src/index.ts
+ * @LastEditTime : 2021-06-28 12:42:47
+ * @FilePath     : /you-will-like/src/index.ts
  * @Description: entry
  */
 const search_1 = require("./core/search");

@@ -1,7 +1,7 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-06-25 12:06:43
- * @LastEditTime : 2021-06-28 11:27:45
+ * @LastEditTime : 2021-06-28 14:21:47
  * @FilePath     : /you-will-like/src/core/formData/formData.ts
  * @Description  : formData
  */
@@ -16,7 +16,8 @@ export class FormDataHandler implements formDataAbstract {
   }
 
   append(name: string, value: string | Blob, fileName?: string): this {
-    this.formData.append(name, value, fileName)
+    if (fileName) this.formData.append(name, value, fileName)
+    else this.formData.append(name, value)
     return this
   }
 
@@ -38,12 +39,14 @@ export class FormDataHandler implements formDataAbstract {
   }
 
   set(name: string, value: string | Blob, fileName?: string): this {
-    this.formData.set(name, value, fileName)
+    if (fileName) this.formData.set(name, value, fileName)
+    else this.formData.set(name, value)
     return this
   }
 
   forEach(callbackFn: (value: FormDataEntryValue, key: string, parent: FormData) => void, thisArg?: any): this {
-    this.formData.forEach(callbackFn, thisArg)
+    if (thisArg) this.formData.forEach(callbackFn, thisArg)
+    else this.formData.forEach(callbackFn)
     return this
   }
 
