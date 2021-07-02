@@ -4,7 +4,7 @@ exports.JSet = exports.JMap = exports.base64OrUniCode = exports.Strategist = exp
 /*
  * @Author: 邱狮杰
  * @Date: 2021-06-25 22:57:06
- * @LastEditTime: 2021-07-02 23:37:45
+ * @LastEditTime: 2021-07-02 23:42:59
  * @FilePath: /you-will-like/src/index.ts
  * @Description: entry
  */

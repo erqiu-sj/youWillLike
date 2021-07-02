@@ -1,42 +1,56 @@
-import {formDataAbstract} from './types'
+/*
+ * @Author       : 邱狮杰
+ * @Date         : 2021-06-25 12:06:43
+ * @LastEditTime : 2021-06-28 14:29:12
+ * @FilePath     : /you-will-like/src/core/formData/formData.ts
+ * @Description  : formData
+ */
 
-export class FormDataHandler implements formDataAbstract {
-    private readonly formData: FormData
+import { formDataAbstract } from './types'
 
-    constructor() {
-        this.formData = new FormData()
-    }
+export class FormDataHandler<T extends object> implements formDataAbstract<T> {
+  private readonly formData: FormData
 
-    append(name: string, value: string | Blob, fileName?: string): this {
-        this.formData.append(name, value, fileName)
-        return this
-    }
+  constructor() {
+    this.formData = new FormData()
+  }
 
-    delete(name: string): this {
-        this.formData.delete(name)
-        return this
-    }
+  append(name: keyof T, value: string | Blob, fileName?: string): this {
+    if (fileName) this.formData.append(name as string, value, fileName)
+    else this.formData.append(name as string, value)
+    return this
+  }
 
-    get(name: string): FormDataEntryValue | null {
-        return this.formData.get(name);
-    }
+  delete(name: keyof T): this {
+    this.formData.delete(name as string)
+    return this
+  }
 
-    getAll(name: string): FormDataEntryValue[] {
-        return this.formData.getAll(name);
-    }
+  get(name: keyof T): FormDataEntryValue | null {
+    return this.formData.get(name as string)
+  }
 
-    has(name: string): boolean {
-        return this.formData.has(name);
-    }
+  getAll(name: string): FormDataEntryValue[] {
+    return this.formData.getAll(name)
+  }
 
-    set(name: string, value: string | Blob, fileName?: string): this {
-        this.formData.set(name, value, fileName)
-        return this;
-    }
+  has(name: keyof T): boolean {
+    return this.formData.has(name as string)
+  }
 
-    forEach(callbackFn: (value: FormDataEntryValue, key: string, parent: FormData) => void, thisArg?: any): this {
-        this.formData.forEach(callbackFn, thisArg)
-        return this;
-    }
+  set(name: keyof T, value: string | Blob, fileName?: string): this {
+    if (fileName) this.formData.set(name as string, value, fileName)
+    else this.formData.set(name as string, value)
+    return this
+  }
 
+  forEach(callbackFn: (value: FormDataEntryValue, key: string, parent: FormData) => void, thisArg?: any): this {
+    if (thisArg) this.formData.forEach(callbackFn, thisArg)
+    else this.formData.forEach(callbackFn)
+    return this
+  }
+
+  return(): FormData {
+    return this.formData
+  }
 }
