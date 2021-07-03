@@ -1,9 +1,9 @@
 {
   "name": "youwilllike",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "tools",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./src/core",
+  "module": "./src/core",
   "scripts": {
     "test": "jest"
   },
@@ -17,7 +17,9 @@
   ],
   "author": "hooks28",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
   "devDependencies": {
     "jest": "^27.0.5"
   }

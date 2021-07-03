@@ -1,7 +1,7 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-06-26 22:00:41
- * @LastEditTime: 2021-06-26 22:33:22
+ * @LastEditTime: 2021-07-03 14:25:51
  * @FilePath: /you-will-like/src/core/strategist/strategist.ts
  * @Description: 策略者
  */
