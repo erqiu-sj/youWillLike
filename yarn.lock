@@ -2281,6 +2281,18 @@ symbol-tree@^3.2.4:
   resolved "https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
+synchronizationawaiterror@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.nlark.com/synchronizationawaiterror/download/synchronizationawaiterror-0.0.4.tgz#1a5d3fad86aa74708b29254bc9a5d5962986853b"
+  integrity sha1-Gl0/rYaqdHCLKSVLyaXVlimGhTs=
+
+synchronizationawaiterror@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.nlark.com/synchronizationawaiterror/download/synchronizationawaiterror-0.0.8.tgz#12e793fb4a66b33344b80a18070825b9b41cc130"
+  integrity sha1-EueT+0pmszNEuAoYBwglubQcwTA=
+  dependencies:
+    synchronizationawaiterror "^0.0.4"
+
 terminal-link@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"

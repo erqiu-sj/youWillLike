@@ -1,6 +1,6 @@
 {
   "name": "youwilllike",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "tools",
   "main": "./src/core",
   "module": "./src/core",
@@ -18,7 +18,8 @@
   "author": "hooks28",
   "license": "MIT",
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "synchronizationawaiterror": "^0.0.8"
   },
   "devDependencies": {
     "jest": "^27.0.5"
