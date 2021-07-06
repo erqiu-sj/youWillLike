@@ -1,7 +1,7 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-02 23:50:19
- * @LastEditTime : 2021-07-06 10:14:44
+ * @LastEditTime : 2021-07-06 10:30:04
  * @FilePath     : /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
@@ -45,13 +45,13 @@ export function catchErrorPromise<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value
     desc.value = async function () {
-      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(desc.value)
+      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
       if (err) cb(err)
     }
   }
 }
 
-export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>) {
+export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>): any {
   return async function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value
     desc.value = async function () {
