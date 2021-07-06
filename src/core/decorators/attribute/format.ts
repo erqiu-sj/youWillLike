@@ -5,9 +5,9 @@
  * @FilePath: /you-will-like/src/core/decorators/attribute/format.ts
  * @Description: 格式化
  */
-import "reflect-metadata";
+import 'reflect-metadata'
 
-type formatFnTypes<P, T> = (params: P) => T;
+type formatFnTypes<P, T> = (params: P) => T
 
 /**
  * @description 格式化属性
@@ -17,8 +17,8 @@ type formatFnTypes<P, T> = (params: P) => T;
  */
 export function format<P, T>(formatFn: formatFnTypes<P, T>, params: P) {
   return function (target: any, key: string) {
-    Reflect.defineMetadata(key, formatFn(params), target);
-  };
+    Reflect.defineMetadata(key, formatFn(params), target)
+  }
 }
 /**
  * @description 函数装饰器获取被装饰的格式化属性
@@ -26,14 +26,10 @@ export function format<P, T>(formatFn: formatFnTypes<P, T>, params: P) {
  * @returns
  */
 export function getFormatValue<T>(property: string) {
-  return function (
-    target: any,
-    key: string,
-    desc: TypedPropertyDescriptor<() => T>
-  ) {
-    const defaultVal: T = Reflect.getMetadata(property, target);
+  return function (target: any, key: string, desc: TypedPropertyDescriptor<() => T>) {
+    const defaultVal: T = Reflect.getMetadata(property, target)
     desc.value = function () {
-      return defaultVal as T;
-    };
-  };
+      return defaultVal as T
+    }
+  }
 }

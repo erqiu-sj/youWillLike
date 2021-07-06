@@ -1,12 +1,12 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-02 23:50:19
- * @LastEditTime : 2021-07-06 12:04:18
+ * @LastEditTime : 2021-07-06 12:31:16
  * @FilePath     : /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
 import { SynchronizationAwaitError } from 'synchronizationawaiterror'
-type catchErrorCb<T> = (errMessage: T) => void
+export type catchErrorCb<T> = (errMessage: T) => void
 /**
  * @description 将错误字符串传入回调
  * @param { catchErrorCb } cb
@@ -29,7 +29,7 @@ export function catchError(cb: catchErrorCb<string>): any {
  * @param { catchErrorCb } cb  回调函数
  * @returns
  */
-export function catchErrorJSONParse<T>(cb: catchErrorCb<T>) {
+export function catchErrorJSONParse<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<Function>) {
     const fn = desc.value
     desc.value = function () {
