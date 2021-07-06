@@ -1,7 +1,7 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-02 23:50:19
- * @LastEditTime : 2021-07-05 12:37:32
+ * @LastEditTime : 2021-07-06 10:14:44
  * @FilePath     : /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
@@ -12,12 +12,15 @@ type catchErrorCb<T> = (errMessage: T) => void
  * @param { catchErrorCb } cb
  * @returns
  */
-export function catchError(cb: catchErrorCb<string>) {
+export function catchError(cb: catchErrorCb<string>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<Function>) {
-    try {
-      desc.value && desc.value()
-    } catch (e: { message?: string } | any) {
-      cb(e?.message || e)
+    const fn = desc.value
+    desc.value = function () {
+      try {
+        fn?.()
+      } catch (e) {
+        cb(e?.message || e)
+      }
     }
   }
 }
@@ -28,24 +31,32 @@ export function catchError(cb: catchErrorCb<string>) {
  */
 export function catchErrorJSONParse<T>(cb: catchErrorCb<T>) {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<Function>) {
-    try {
-      desc.value && desc.value()
-    } catch (e: { message?: string } | any) {
-      if (e?.message) cb(JSON.parse(e.message))
-      else cb(JSON.parse(e))
+    const fn = desc.value
+    desc.value = function () {
+      try {
+        fn?.()
+      } catch (e) {
+        cb(e?.message ? JSON.parse(e?.message) : JSON.parse(e))
+      }
     }
   }
 }
 export function catchErrorPromise<T>(cb: catchErrorCb<T>): any {
-  return async function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
-    const [err] = await SynchronizationAwaitError<unknown, unknown, any>(desc.value?.())
-    if (err) cb(err)
+  return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
+    const fn = desc.value
+    desc.value = async function () {
+      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(desc.value)
+      if (err) cb(err)
+    }
   }
 }
 
 export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>) {
   return async function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
-    const [err] = await SynchronizationAwaitError<unknown, unknown, any>(desc.value?.())
-    if (err) cb(JSON.parse(err))
+    const fn = desc.value
+    desc.value = async function () {
+      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
+      if (err) cb(JSON.parse(err))
+    }
   }
 }
