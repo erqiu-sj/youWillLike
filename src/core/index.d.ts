@@ -6,8 +6,8 @@
  * @Description  : entry
  */
 
-/// <reference path="./chain/chain.d.ts" />
-/// <reference path="./decorators/decorator.d.ts" />
-/// <reference path="./function/function.d.ts" />
-/// <reference path="./search/search.d.ts" />
-/// <reference path="./strategist/strategist.d.ts" />
+/// <reference path="./chain/index.d.ts" />
+/// <reference path="./decorators/index.d.ts" />
+/// <reference path="./function/index.d.ts" />
+/// <reference path="./search/index.d.ts" />
+/// <reference path="./strategist/index.d.ts" />

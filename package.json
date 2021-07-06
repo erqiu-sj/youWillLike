@@ -1,9 +1,10 @@
 {
   "name": "youwilllike",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "tools",
   "main": "./src/core",
   "module": "./src/core",
+  "types": "./src/core/**.d.ts",
   "scripts": {
     "test": "jest"
   },
