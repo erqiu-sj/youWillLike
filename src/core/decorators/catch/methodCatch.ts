@@ -1,7 +1,7 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-02 23:50:19
- * @LastEditTime : 2021-07-06 10:30:04
+ * @LastEditTime : 2021-07-06 12:04:18
  * @FilePath     : /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
@@ -17,7 +17,7 @@ export function catchError(cb: catchErrorCb<string>): any {
     const fn = desc.value
     desc.value = function () {
       try {
-        fn?.()
+        return fn?.()
       } catch (e) {
         cb(e?.message || e)
       }
@@ -34,7 +34,7 @@ export function catchErrorJSONParse<T>(cb: catchErrorCb<T>) {
     const fn = desc.value
     desc.value = function () {
       try {
-        fn?.()
+        return fn?.()
       } catch (e) {
         cb(e?.message ? JSON.parse(e?.message) : JSON.parse(e))
       }
@@ -45,8 +45,9 @@ export function catchErrorPromise<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value
     desc.value = async function () {
-      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
+      const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
       if (err) cb(err)
+      return res
     }
   }
 }
@@ -55,8 +56,9 @@ export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>): any {
   return async function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value
     desc.value = async function () {
-      const [err] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
+      const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(fn())
       if (err) cb(JSON.parse(err))
+      return res
     }
   }
 }
