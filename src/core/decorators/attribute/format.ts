@@ -1,8 +1,8 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-03 11:18:45
- * @LastEditTime: 2021-07-03 14:22:48
- * @FilePath: /you-will-like/src/core/decorators/attribute/format.ts
+ * @LastEditTime : 2021-07-12 12:28:11
+ * @FilePath     : /you-will-like/src/core/decorators/attribute/format.ts
  * @Description: 格式化
  */
 import 'reflect-metadata'
@@ -17,7 +17,11 @@ type formatFnTypes<P, T> = (params: P) => T
  */
 export function format<P, T>(formatFn: formatFnTypes<P, T>, params: P) {
   return function (target: any, key: string) {
-    Reflect.defineMetadata(key, formatFn(params), target)
+    const desc: PropertyDescriptor = {
+      writable: true,
+      value: formatFn(params),
+    }
+    return desc
   }
 }
 /**
