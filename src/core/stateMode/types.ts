@@ -28,7 +28,6 @@ export interface stateModeOptions {
 }
 // 用户需要实现的借口
 export interface dispatchAbstract {
-  // abstract run(): this;
   run(): void;
   setState(curState: stateModeUserOptions["currentState"]): string | number;
 }

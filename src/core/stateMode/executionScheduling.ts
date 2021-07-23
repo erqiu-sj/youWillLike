@@ -1,14 +1,14 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-21 12:40:25
- * @LastEditTime: 2021-07-22 23:29:35
- * @FilePath: /you-will-like/src/core/stateMode/executionScheduling.ts
+ * @LastEditTime : 2021-07-23 16:21:24
+ * @FilePath     : /you-will-like/src/core/stateMode/executionScheduling.ts
  * @Description  : simpleStateMachine
  */
 import { BaseStateMachine } from "./baseStateMachine";
 import { stateModeUserOptions, dispatchAbstract } from "./types";
 import { optionHasThisValue } from "./utils";
-class executionScheduling extends BaseStateMachine {
+export default class executionScheduling extends BaseStateMachine {
   constructor(
     stateInstance: (Function & dispatchAbstract)[],
     executionQueueParameters: ArrayLike<any>[],
@@ -33,6 +33,7 @@ class executionScheduling extends BaseStateMachine {
    */
   protected scheduleNotInstantiated() {
     const curFn = this.executionQueue.get(this.currentState)?.fn;
+    console.log(curFn, this.currentState)
     const curParams = this.executionQueue.get(this.currentState)?.params;
     let instance = null;
     if (this.executionQueue.get(this.currentState)?.initialization) {
@@ -53,8 +54,8 @@ class executionScheduling extends BaseStateMachine {
     (instance as dispatchAbstract).run();
     this.setStateCurrentState(
       (instance as dispatchAbstract).setState(this.currentState) as
-        | string
-        | number
+      | string
+      | number
     );
     instance = null;
     // console.log(this.executionQueue.get(this.currentState));
@@ -92,11 +93,8 @@ class A implements dispatchAbstract {
     console.log("我执行了A");
   }
 }
-new executionScheduling([B as any, A], [[1], []], {
+new executionScheduling([B as any], [[1]], {
   currentState: "currentState",
   onDemandInitialization: true,
 })
-  .run()
-  .run()
-  .run()
-  .run();
+  .run().addState(A as any, []).run()
