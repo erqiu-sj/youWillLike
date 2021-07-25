@@ -5,7 +5,7 @@
  * @FilePath     : /you-will-like/src/core/function/index.ts
  * @Description: function all
  */
-import * as base64OrUniCode from './encryptionAndDecryption'
-import * as judgment from './judgment'
+import * as base64OrUniCode from "./encryptionAndDecryption";
+import * as judgment from "./judgment";
 
-export { base64OrUniCode, judgment }
+export { base64OrUniCode, judgment };
