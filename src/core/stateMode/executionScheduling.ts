@@ -1,8 +1,8 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-21 12:40:25
- * @LastEditTime : 2021-07-23 16:21:24
- * @FilePath     : /you-will-like/src/core/stateMode/executionScheduling.ts
+ * @LastEditTime: 2021-07-25 12:31:04
+ * @FilePath: /you-will-like/src/core/stateMode/executionScheduling.ts
  * @Description  : simpleStateMachine
  */
 import { BaseStateMachine } from "./baseStateMachine";
@@ -33,7 +33,6 @@ export default class executionScheduling extends BaseStateMachine {
    */
   protected scheduleNotInstantiated() {
     const curFn = this.executionQueue.get(this.currentState)?.fn;
-    console.log(curFn, this.currentState)
     const curParams = this.executionQueue.get(this.currentState)?.params;
     let instance = null;
     if (this.executionQueue.get(this.currentState)?.initialization) {
@@ -54,11 +53,10 @@ export default class executionScheduling extends BaseStateMachine {
     (instance as dispatchAbstract).run();
     this.setStateCurrentState(
       (instance as dispatchAbstract).setState(this.currentState) as
-      | string
-      | number
+        | string
+        | number
     );
     instance = null;
-    // console.log(this.executionQueue.get(this.currentState));
   }
   /**
    * @description 调度实例化
@@ -72,29 +70,3 @@ export default class executionScheduling extends BaseStateMachine {
     );
   }
 }
-class B implements dispatchAbstract {
-  static currentState = "currentState";
-  constructor(num: number) {
-    console.log(num);
-  }
-  setState(curState: string | number): string | number {
-    return "currentStateNext";
-  }
-  run() {
-    console.log("我执行了B");
-  }
-}
-class A implements dispatchAbstract {
-  static currentState = "currentStateNext";
-  setState(curState: string | number): string | number {
-    return "currentState";
-  }
-  run() {
-    console.log("我执行了A");
-  }
-}
-new executionScheduling([B as any], [[1]], {
-  currentState: "currentState",
-  onDemandInitialization: true,
-})
-  .run().addState(A as any, []).run()

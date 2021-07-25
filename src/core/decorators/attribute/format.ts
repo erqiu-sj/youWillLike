@@ -1,13 +1,15 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-03 11:18:45
- * @LastEditTime : 2021-07-12 12:28:11
- * @FilePath     : /you-will-like/src/core/decorators/attribute/format.ts
+ * @LastEditTime: 2021-07-25 12:21:18
+ * @FilePath: /you-will-like/src/core/decorators/attribute/format.ts
  * @Description: 格式化
  */
-import 'reflect-metadata'
+import "reflect-metadata";
+import dayjs from "dayjs";
+import type { ConfigType } from "dayjs";
 
-type formatFnTypes<P, T> = (params: P) => T
+type formatFnTypes<P, T> = (params: P) => T;
 
 /**
  * @description 格式化属性
@@ -16,24 +18,21 @@ type formatFnTypes<P, T> = (params: P) => T
  * @returns
  */
 export function format<P, T>(formatFn: formatFnTypes<P, T>, params: P) {
-  return function (target: any, key: string) {
+  return function (target: any, key: string): any {
     const desc: PropertyDescriptor = {
       writable: true,
       value: formatFn(params),
-    }
-    return desc
-  }
+    };
+    return desc;
+  };
 }
-/**
- * @description 函数装饰器获取被装饰的格式化属性
- * @param { string } property 该class中的属性key
- * @returns
- */
-export function getFormatValue<T>(property: string) {
-  return function (target: any, key: string, desc: TypedPropertyDescriptor<() => T>) {
-    const defaultVal: T = Reflect.getMetadata(property, target)
-    desc.value = function () {
-      return defaultVal as T
-    }
-  }
+
+export function formatDayJs(date?: ConfigType) {
+  return function (target: object, key: string): any {
+    const desc: PropertyDescriptor = {
+      writable: true,
+      value: dayjs(date),
+    };
+    return desc;
+  };
 }

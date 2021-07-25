@@ -1,10 +1,10 @@
 {
   "name": "youwilllike",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "tools",
   "main": "./src/core",
   "module": "./src/core",
-  "types": "./src/core/**.d.ts",
+  "types": "./src/**/*.d.ts",
   "scripts": {
     "test": "jest"
   },
@@ -19,6 +19,7 @@
   "author": "hooks28",
   "license": "MIT",
   "dependencies": {
+    "dayjs": "^1.10.6",
     "reflect-metadata": "^0.1.13",
     "synchronizationawaiterror": "^0.0.8"
   },

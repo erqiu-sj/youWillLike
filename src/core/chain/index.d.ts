@@ -5,5 +5,5 @@
  * @FilePath     : /you-will-like/src/core/chain/index.d.ts
  * @Description: .d.ts
  */
-import { JMap, JSet } from './index'
-export { JMap, JSet }
+import { JMap, JSet } from "./index";
+export { JMap, JSet };
