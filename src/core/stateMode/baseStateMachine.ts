@@ -1,7 +1,7 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-21 12:47:17
- * @LastEditTime: 2021-07-25 12:30:54
+ * @LastEditTime: 2021-07-26 21:19:56
  * @FilePath: /you-will-like/src/core/stateMode/baseStateMachine.ts
  * @Description  : baseStateMachine
  */
@@ -177,7 +177,81 @@ export class BaseStateMachine {
         })
     );
   }
-  protected destroy(): void {
+
+  /**
+   * @description 为已存在的实例修改参数
+   * @param { string | number } curState 根据实例的curState寻找实例
+   * @param { ArrayLike<any> } params 实例参数
+   * @returns { this }
+   */
+  modifyInstanceParameters(
+    curState: string | number,
+    params: ArrayLike<any>
+  ): this {
+    optionHasThisValue(
+      this.options,
+      "initializationMode",
+      "initialization",
+      "onDemandInitialization",
+      () => {
+        if (!this.instanceExecutionQueue.has(curState))
+          throw new Error(
+            "Cannot assign parameters to a non-existent instance"
+          );
+        this.instanceExecutionQueue.set(
+          curState,
+          Reflect.construct(
+            this.instanceExecutionQueue.get(curState) as Function,
+            params
+          )
+        );
+      },
+      () => {
+        if (!this.executionQueue.has(curState))
+          throw new Error(
+            "Cannot assign parameters to a non-existent instance"
+          );
+        this.executionQueue.set(curState, {
+          fn: this.executionQueue.get(curState)!.fn,
+          params,
+          initialization: false,
+        });
+      },
+      () => {
+        if (!this.executionQueue.has(curState))
+          throw new Error(
+            "Cannot assign parameters to a non-existent instance"
+          );
+        this.executionQueue.set(curState, {
+          fn: this.executionQueue.get(curState)!.fn,
+          params,
+          initialization: false,
+        });
+      }
+    );
+    return this;
+  }
+  /**
+   * @description 删除实例
+   * @param { string | number } curState 根据实例的curState删除实例
+   * @returns { this }
+   */
+  deleteInstance(curState: string | number): this {
+    optionHasThisValue(
+      this.options,
+      "initializationMode",
+      "initialization",
+      "onDemandInitialization",
+      () => this.instanceExecutionQueue.delete(curState),
+      () => this.executionQueue.delete(curState),
+      () => this.executionQueue.delete(curState)
+    );
+    return this;
+  }
+  /**
+   * @description 销毁所有实例
+   */
+  destroy(): void {
     this.executionQueue.clear();
     this.instanceExecutionQueue.clear();
   }

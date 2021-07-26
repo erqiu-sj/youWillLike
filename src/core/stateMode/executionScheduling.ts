@@ -1,7 +1,7 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-21 12:40:25
- * @LastEditTime: 2021-07-25 12:31:04
+ * @LastEditTime: 2021-07-26 21:26:55
  * @FilePath: /you-will-like/src/core/stateMode/executionScheduling.ts
  * @Description  : simpleStateMachine
  */
@@ -32,12 +32,12 @@ export default class executionScheduling extends BaseStateMachine {
    * @description 调度未实例化
    */
   protected scheduleNotInstantiated() {
-    const curFn = this.executionQueue.get(this.currentState)?.fn;
-    const curParams = this.executionQueue.get(this.currentState)?.params;
     let instance = null;
     if (this.executionQueue.get(this.currentState)?.initialization) {
       instance = this.executionQueue.get(this.currentState)?.fn;
     } else {
+      const curFn = this.executionQueue.get(this.currentState)?.fn;
+      const curParams = this.executionQueue.get(this.currentState)?.params;
       // 没有初始化
       instance = Reflect.construct(
         curFn as Function,

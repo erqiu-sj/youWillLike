@@ -1,7 +1,7 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-05 12:40:51
- * @LastEditTime: 2021-07-25 15:21:43
+ * @LastEditTime: 2021-07-26 20:55:54
  * @FilePath: /you-will-like/src/core/function/judgment.ts
  * @Description  : 判断相关
  */
@@ -17,11 +17,11 @@ export function nonEmptyJudgment<T, R>(
   return cb(val);
 }
 
-export function replaceObjectProperties(
-  contrast: object,
-  beforeReplacement: string[],
+export function replaceObjectProperties<T extends object, R extends object>(
+  contrast: T,
+  beforeReplacement: (keyof T)[],
   afterReplacement: string[]
-) {
+): R {
   if (beforeReplacement.length !== afterReplacement.length)
     throw new Error(
       "The length of the replacement attribute does not want to wait"
@@ -29,7 +29,10 @@ export function replaceObjectProperties(
   let r = JSON.stringify(contrast);
   beforeReplacement.forEach(
     (beforeItem, beforeIndex) =>
-      (r = r.replace(new RegExp(beforeItem), afterReplacement[beforeIndex]))
+      (r = r.replace(
+        new RegExp(beforeItem as string),
+        afterReplacement[beforeIndex]
+      ))
   );
   return JSON.parse(r);
 }
