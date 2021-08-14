@@ -6,6 +6,8 @@
  * @Description: entry
  */
 
+import { JLocalstorage } from "./localstoreage/localstorage";
 import { JMap } from "./map/map";
 import { JSet } from "./set/set";
-export { JMap, JSet };
+
+export { JMap, JSet, JLocalstorage };
