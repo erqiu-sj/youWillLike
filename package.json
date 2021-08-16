@@ -1,13 +1,11 @@
 {
   "name": "youwilllike",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "tools",
-  "main": "./src/core",
-  "module": "./src/core",
+  "main": "/dist/core",
+  "module": "/dist/core",
   "types": "./src/**/*.d.ts",
-  "scripts": {
-    "test": "jest"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://gitee.com/Jsman/you-will-like.git"

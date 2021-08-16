@@ -1,7 +1,7 @@
 /*
  * @Author       : 邱狮杰
  * @Date         : 2021-07-21 12:47:17
- * @LastEditTime: 2021-07-26 21:19:56
+ * @LastEditTime: 2021-08-16 12:33:03
  * @FilePath: /you-will-like/src/core/stateMode/baseStateMachine.ts
  * @Description  : baseStateMachine
  */
@@ -45,7 +45,7 @@ export class BaseStateMachine {
     this.stateInstance = stateInstance;
     this.executionQueueParameters = executionQueueParameters || [];
     this.options = stateOptions || {};
-    stateOptions && this.#parseOptios(stateOptions);
+    stateOptions && this.parseOptios(stateOptions);
     optionHasThisValue(
       this.options,
       "initializationMode",
@@ -61,7 +61,7 @@ export class BaseStateMachine {
    */
   protected onDemandInitialization() {
     this.stateInstance.forEach((instance, instanceIndex) =>
-      this.#waitingForInstance({
+      this.waitingForInstance({
         fn: instance,
         params: this.executionQueueParameters[instanceIndex],
         initialization: false,
@@ -78,7 +78,7 @@ export class BaseStateMachine {
         "The instance list should be the same length as the strength parameter list"
       );
     this.stateInstance.forEach((instanceItem, instanceIndex) =>
-      this.#instantiatedState(
+      this.instantiatedState(
         instanceItem,
         this.executionQueueParameters[instanceIndex]
       )
@@ -87,7 +87,7 @@ export class BaseStateMachine {
   /**
    * @description 解析options
    */
-  #parseOptios(stateOptions: stateModeUserOptions) {
+  private parseOptios(stateOptions: stateModeUserOptions) {
     const options: stateModeOptions = {
       initializationMode: optionPriority(stateOptions, "initialization", [
         "initialization",
@@ -119,9 +119,9 @@ export class BaseStateMachine {
       "initializationMode",
       "initialization",
       "onDemandInitialization",
-      () => this.#instantiatedState(fn, params),
-      () => this.#waitingForInstance({ fn, params, initialization: false }),
-      () => this.#waitingForInstance({ fn, params, initialization: false })
+      () => this.instantiatedState(fn, params),
+      () => this.waitingForInstance({ fn, params, initialization: false }),
+      () => this.waitingForInstance({ fn, params, initialization: false })
     );
     return this;
   }
@@ -131,7 +131,7 @@ export class BaseStateMachine {
    * @param { ArrayLike<any> } params
    * @return { void }
    */
-  #instantiatedState(
+  private instantiatedState(
     instance: Function & dispatchAbstract,
     params: ArrayLike<any>
   ): void {
@@ -156,7 +156,7 @@ export class BaseStateMachine {
    * @param { { fn: Function & dispatchAbstract ,params: ArrayLike<any> ,initialization: boolean } } instance
    * @return { void }
    */
-  #waitingForInstance(instance: {
+  private waitingForInstance(instance: {
     fn: Function & dispatchAbstract;
     params: ArrayLike<any>;
     initialization: boolean;
