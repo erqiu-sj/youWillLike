@@ -1,39 +1,40 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JMap = void 0;
-class JMap {
-    constructor() {
+var JMap = /** @class */ (function () {
+    function JMap() {
         this.selfMap = new Map();
     }
-    clear() {
+    JMap.prototype.clear = function () {
         this.selfMap.clear();
         return this;
-    }
-    delete(key) {
+    };
+    JMap.prototype.delete = function (key) {
         this.selfMap.delete(key);
         return this;
-    }
+    };
     // @ts-ignore
-    forEach(callbackfn, thisArg) {
+    JMap.prototype.forEach = function (callbackfn, thisArg) {
         if (thisArg)
             this.selfMap.forEach(callbackfn, thisArg);
         else
             this.selfMap.forEach(callbackfn);
         return this;
-    }
-    get(key) {
+    };
+    JMap.prototype.get = function (key) {
         return this.selfMap.get(key);
-    }
-    has(key) {
+    };
+    JMap.prototype.has = function (key) {
         return this.selfMap.has(key);
-    }
-    set(key, value) {
+    };
+    JMap.prototype.set = function (key, value) {
         this.selfMap.set(key, value);
         return this;
-    }
+    };
     // @ts-ignore
-    return() {
+    JMap.prototype.return = function () {
         return this.selfMap;
-    }
-}
+    };
+    return JMap;
+}());
 exports.JMap = JMap;

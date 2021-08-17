@@ -8,6 +8,9 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.abstractSet = void 0;
-class abstractSet {
-}
+var abstractSet = /** @class */ (function () {
+    function abstractSet() {
+    }
+    return abstractSet;
+}());
 exports.abstractSet = abstractSet;

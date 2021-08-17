@@ -5,5 +5,5 @@
  * @FilePath     : /you-will-like/src/core/function/index.d.ts
  * @Description: .d.ts
  */
-import { base64OrUniCode, judgment } from './index'
-export { base64OrUniCode, judgment }
+import { base64OrUniCode, judgment } from "./index";
+export { base64OrUniCode, judgment };

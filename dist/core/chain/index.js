@@ -8,9 +8,9 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JLocalstorage = exports.JSet = exports.JMap = void 0;
-const localstorage_1 = require("./localstoreage/localstorage");
+var localstorage_1 = require("./localstoreage/localstorage");
 Object.defineProperty(exports, "JLocalstorage", { enumerable: true, get: function () { return localstorage_1.JLocalstorage; } });
-const map_1 = require("./map/map");
+var map_1 = require("./map/map");
 Object.defineProperty(exports, "JMap", { enumerable: true, get: function () { return map_1.JMap; } });
-const set_1 = require("./set/set");
+var set_1 = require("./set/set");
 Object.defineProperty(exports, "JSet", { enumerable: true, get: function () { return set_1.JSet; } });

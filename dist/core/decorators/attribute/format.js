@@ -12,7 +12,7 @@ exports.formatDayJs = exports.format = void 0;
  * @Description: 格式化
  */
 require("reflect-metadata");
-const dayjs_1 = __importDefault(require("dayjs"));
+var dayjs_1 = __importDefault(require("dayjs"));
 /**
  * @description 格式化属性
  * @param { formatFnTypes } formatFn 函数返回值会是该属性的值
@@ -21,7 +21,7 @@ const dayjs_1 = __importDefault(require("dayjs"));
  */
 function format(formatFn, params) {
     return function (target, key) {
-        const desc = {
+        var desc = {
             writable: true,
             value: formatFn(params),
         };
@@ -31,7 +31,7 @@ function format(formatFn, params) {
 exports.format = format;
 function formatDayJs(date) {
     return function (target, key) {
-        const desc = {
+        var desc = {
             writable: true,
             value: dayjs_1.default(date),
         };

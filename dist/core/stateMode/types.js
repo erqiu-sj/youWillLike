@@ -8,6 +8,9 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stateModeSimpleAbstract = void 0;
-class stateModeSimpleAbstract {
-}
+var stateModeSimpleAbstract = /** @class */ (function () {
+    function stateModeSimpleAbstract() {
+    }
+    return stateModeSimpleAbstract;
+}());
 exports.stateModeSimpleAbstract = stateModeSimpleAbstract;

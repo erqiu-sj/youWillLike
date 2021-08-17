@@ -5,5 +5,5 @@
  * @FilePath: /you-will-like/src/core/search/index.d.ts
  * @Description: .d.ts
  */
-import { SearchHandler } from "./search";
+import { SearchHandler } from "../../../src/core/search/search";
 export { SearchHandler };

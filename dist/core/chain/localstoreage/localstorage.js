@@ -1,26 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JLocalstorage = void 0;
-class JLocalstorage {
-    constructor() {
+var JLocalstorage = /** @class */ (function () {
+    function JLocalstorage() {
         this.store = localStorage;
     }
-    clear() {
+    JLocalstorage.prototype.clear = function () {
         return this.store.clear();
-    }
-    key(index) {
+    };
+    JLocalstorage.prototype.key = function (index) {
         return this.store.key(index);
-    }
-    getItem(key) {
+    };
+    JLocalstorage.prototype.getItem = function (key) {
         return this.store.getItem(key);
-    }
-    setItem(key, value) {
+    };
+    JLocalstorage.prototype.setItem = function (key, value) {
         this.store.setItem(key, value);
         return this;
-    }
-    removeItem(key) {
+    };
+    JLocalstorage.prototype.removeItem = function (key) {
         this.store.removeItem(key);
         return this;
-    }
-}
+    };
+    return JLocalstorage;
+}());
 exports.JLocalstorage = JLocalstorage;

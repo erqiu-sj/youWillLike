@@ -1,34 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JSet = void 0;
-class JSet {
-    constructor() {
+var JSet = /** @class */ (function () {
+    function JSet() {
         this.selfSet = new Set();
     }
-    add(value) {
+    JSet.prototype.add = function (value) {
         this.selfSet.add(value);
         return this;
-    }
-    clear() {
+    };
+    JSet.prototype.clear = function () {
         this.selfSet.clear();
         return this;
-    }
-    delete(value) {
+    };
+    JSet.prototype.delete = function (value) {
         this.selfSet.delete(value);
         return this;
-    }
-    forEach(cb, thisArgs) {
+    };
+    JSet.prototype.forEach = function (cb, thisArgs) {
         if (thisArgs)
             this.selfSet.forEach(cb, thisArgs);
         else
             this.selfSet.forEach(cb);
         return this;
-    }
-    has(value) {
+    };
+    JSet.prototype.has = function (value) {
         return this.selfSet.has(value);
-    }
-    return() {
+    };
+    JSet.prototype.return = function () {
         return this.selfSet;
-    }
-}
+    };
+    return JSet;
+}());
 exports.JSet = JSet;

@@ -8,12 +8,12 @@ exports.lock = exports.catchErrorPromiseJSONParse = exports.catchErrorPromise = 
  * @FilePath: /you-will-like/src/core/decorators/index.ts
  * @Description: entry
  */
-const format_1 = require("./attribute/format");
+var format_1 = require("./attribute/format");
 Object.defineProperty(exports, "format", { enumerable: true, get: function () { return format_1.format; } });
 Object.defineProperty(exports, "formatDayJs", { enumerable: true, get: function () { return format_1.formatDayJs; } });
-const lock_1 = require("./method/lock");
+var lock_1 = require("./method/lock");
 Object.defineProperty(exports, "lock", { enumerable: true, get: function () { return lock_1.lock; } });
-const methodCatch_1 = require("./catch/methodCatch");
+var methodCatch_1 = require("./catch/methodCatch");
 Object.defineProperty(exports, "catchError", { enumerable: true, get: function () { return methodCatch_1.catchError; } });
 Object.defineProperty(exports, "catchErrorJSONParse", { enumerable: true, get: function () { return methodCatch_1.catchErrorJSONParse; } });
 Object.defineProperty(exports, "catchErrorPromise", { enumerable: true, get: function () { return methodCatch_1.catchErrorPromise; } });

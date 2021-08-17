@@ -1,11 +1,11 @@
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-03 14:26:17
- * @LastEditTime: 2021-07-25 12:25:54
+ * @LastEditTime: 2021-08-16 12:43:52
  * @FilePath: /you-will-like/src/core/decorators/index.d.ts
  * @Description: .d.ts
  */
-import { catchErrorCb } from "./catch/methodCatch";
+import { catchErrorCb } from "../../../dist/core/decorators/catch/methodCatch";
 import { ConfigType } from "dayjs";
 export declare function catchError(cb: catchErrorCb<string>): any;
 export declare function catchErrorJSONParse<T>(cb: catchErrorCb<T>): any;

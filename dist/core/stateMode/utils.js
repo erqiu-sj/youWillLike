@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.optionHasThisValue = exports.optionPriority = void 0;
-const property_1 = require("../../utils/property");
+var property_1 = require("../../utils/property");
 /**
  * @description 根据优先级获取选项内容
  * @param { stateModeUserOptions } options options
@@ -10,13 +10,15 @@ const property_1 = require("../../utils/property");
  * @returns  { keyof stateModeUserOptions } 返回可取的options key
  */
 function optionPriority(options, highestPriority, comparePriority) {
-    const h = {};
-    comparePriority.forEach((compareItem) => property_1.setProperty(h, compareItem, property_1.getProperty(options, compareItem), true));
-    const result = property_1.getProperty(h, highestPriority);
+    var h = {};
+    comparePriority.forEach(function (compareItem) {
+        return property_1.setProperty(h, compareItem, property_1.getProperty(options, compareItem), true);
+    });
+    var result = property_1.getProperty(h, highestPriority);
     if (!result) {
         // 最高优先级的选项为空时取对比优先级的选项key
         // 且对比优先级的value不为空的话取第一个对比优先级key
-        return (comparePriority.filter((compareItem) => {
+        return (comparePriority.filter(function (compareItem) {
             if (compareItem === highestPriority)
                 return;
             if (!property_1.getProperty(h, compareItem))
@@ -44,7 +46,7 @@ function optionHasThisValue(options, key, successkey, failKey, successCb, failCb
         defaultCb && defaultCb();
         return;
     }
-    const resuleKey = property_1.getProperty(options, key);
+    var resuleKey = property_1.getProperty(options, key);
     // 当配置中当key === successKey 时 执行successCb
     // 当配置中当key === failKey 时 执行failCb
     if (resuleKey === successkey)

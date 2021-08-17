@@ -8,5 +8,5 @@ exports.Strategist = void 0;
  * @FilePath: /you-will-like/src/core/strategist/index.ts
  * @Description: 策略者
  */
-const strategist_1 = require("./strategist");
+var strategist_1 = require("./strategist");
 Object.defineProperty(exports, "Strategist", { enumerable: true, get: function () { return strategist_1.Strategist; } });

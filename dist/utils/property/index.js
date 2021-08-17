@@ -8,7 +8,7 @@ exports.setProperty = exports.getProperty = exports.hasProperty = void 0;
  * @FilePath: /you-will-like/src/utils/property/index.ts
  * @Description  : entry
  */
-const property_1 = require("./property");
+var property_1 = require("./property");
 Object.defineProperty(exports, "hasProperty", { enumerable: true, get: function () { return property_1.hasProperty; } });
 Object.defineProperty(exports, "getProperty", { enumerable: true, get: function () { return property_1.getProperty; } });
 Object.defineProperty(exports, "setProperty", { enumerable: true, get: function () { return property_1.setProperty; } });

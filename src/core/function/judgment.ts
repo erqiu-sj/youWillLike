@@ -16,7 +16,13 @@ export function nonEmptyJudgment<T, R>(
   if (val) return val;
   return cb(val);
 }
-
+/**
+ * @description 重写对象属性
+ * @param { T extends object } contrast 被重写对象的副本
+ * @param { keyof T[] } beforeReplacement 被重写对象的key数组
+ * @param { string[] } afterReplacement 根据beforeReplacement索引进行重写
+ * @returns { T }
+ */
 export function replaceObjectProperties<T extends object, R extends object>(
   contrast: T,
   beforeReplacement: (keyof T)[],
@@ -35,4 +41,15 @@ export function replaceObjectProperties<T extends object, R extends object>(
       ))
   );
   return JSON.parse(r);
+}
+/**
+ * @description 单例模式
+ * @param { Function } fn
+ * @returns { ()=>T }
+ */
+export function Singleton<T>(fn: () => T): () => T {
+  let result: null | T = null;
+  return function () {
+    return result ? result : (result = fn());
+  };
 }
