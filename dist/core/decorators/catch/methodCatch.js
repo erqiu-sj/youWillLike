@@ -57,7 +57,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from) {
     return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.catchErrorPromiseJSONParse = exports.catchErrorPromise = exports.catchErrorJSONParse = exports.catchError = void 0;
+exports.catchErrorPromiseJSONParse = exports.catchErrorPromise = exports.catchErrorJSONParse = exports.catchError = exports.SynchronizationAwaitError = void 0;
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-02 23:50:19
@@ -65,7 +65,19 @@ exports.catchErrorPromiseJSONParse = exports.catchErrorPromise = exports.catchEr
  * @FilePath: /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
-var synchronizationawaiterror_1 = require("synchronizationawaiterror");
+// import { SynchronizationAwaitError } from "synchronizationawaiterror";
+function SynchronizationAwaitError(promise, beautifyReturnValue, errorCaptured) {
+    return promise
+        .then(function (result) {
+        return [null, beautifyReturnValue ? beautifyReturnValue(result) : result];
+    })
+        .catch(function (causeOfError) {
+        if (errorCaptured)
+            return [Object.assign(causeOfError, errorCaptured), null];
+        return [causeOfError, null];
+    });
+}
+exports.SynchronizationAwaitError = SynchronizationAwaitError;
 /**
  * @description 将错误字符串传入回调
  * @param { catchErrorCb } cb
@@ -88,7 +100,7 @@ exports.catchError = catchError;
 /**
  * @description 将错误json转为对象,传入回调
  * @param { catchErrorCb } cb  回调函数
- * @returns
+ * @returns { any }
  */
 function catchErrorJSONParse(cb) {
     return function (_, key, desc) {
@@ -104,17 +116,21 @@ function catchErrorJSONParse(cb) {
     };
 }
 exports.catchErrorJSONParse = catchErrorJSONParse;
+/**
+ * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
+ * @param { catchErrorCb } cb 错误回调
+ * @returns { any }
+ */
 function catchErrorPromise(cb) {
     return function (_, key, desc) {
         var fn = desc.value;
+        var args = arguments;
         desc.value = function () {
-            return __awaiter(this, arguments, void 0, function () {
+            return __awaiter(this, void 0, void 0, function () {
                 var _a, err, res;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
-                        case 0: return [4 /*yield*/, synchronizationawaiterror_1.SynchronizationAwaitError(
-                            // @ts-ignore
-                            fn.apply(void 0, __spreadArray([], __read(arguments))))];
+                        case 0: return [4 /*yield*/, SynchronizationAwaitError(fn.apply(void 0, __spreadArray([], __read(args))))];
                         case 1:
                             _a = __read.apply(void 0, [_b.sent(), 2]), err = _a[0], res = _a[1];
                             if (err)
@@ -127,32 +143,32 @@ function catchErrorPromise(cb) {
     };
 }
 exports.catchErrorPromise = catchErrorPromise;
+/**
+ * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
+ * @param { catchErrorCb } cb 错误回调
+ * @returns { any }
+ */
 function catchErrorPromiseJSONParse(cb) {
     return function (_, key, desc) {
-        return __awaiter(this, void 0, void 0, function () {
-            var fn;
-            return __generator(this, function (_a) {
-                fn = desc.value;
-                desc.value = function () {
-                    return __awaiter(this, arguments, void 0, function () {
-                        var _a, err, res;
-                        return __generator(this, function (_b) {
-                            switch (_b.label) {
-                                case 0: return [4 /*yield*/, synchronizationawaiterror_1.SynchronizationAwaitError(
-                                    // @ts-ignore
-                                    fn.apply(void 0, __spreadArray([], __read(arguments))))];
-                                case 1:
-                                    _a = __read.apply(void 0, [_b.sent(), 2]), err = _a[0], res = _a[1];
-                                    if (err)
-                                        cb(JSON.parse(err));
-                                    return [2 /*return*/, res];
-                            }
-                        });
-                    });
-                };
-                return [2 /*return*/];
+        var fn = desc.value;
+        var args = arguments;
+        desc.value = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var _a, err, res;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0: return [4 /*yield*/, SynchronizationAwaitError(
+                            // //@ts-ignor
+                            fn.apply(void 0, __spreadArray([], __read(args))))];
+                        case 1:
+                            _a = __read.apply(void 0, [_b.sent(), 2]), err = _a[0], res = _a[1];
+                            if (err)
+                                cb(JSON.parse(err));
+                            return [2 /*return*/, res];
+                    }
+                });
             });
-        });
+        };
     };
 }
 exports.catchErrorPromiseJSONParse = catchErrorPromiseJSONParse;

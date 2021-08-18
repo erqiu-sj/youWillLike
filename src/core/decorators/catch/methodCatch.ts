@@ -5,7 +5,23 @@
  * @FilePath: /you-will-like/src/core/decorators/catch/methodCatch.ts
  * @Description: methodCatch
  */
-import { SynchronizationAwaitError } from "synchronizationawaiterror";
+// import { SynchronizationAwaitError } from "synchronizationawaiterror";
+export function SynchronizationAwaitError<T, B = T, E = Error>(
+  promise: Promise<T>,
+  beautifyReturnValue?: (res: T) => B,
+  errorCaptured?: object
+): Promise<[E, null] | [null, T | B]> {
+  return promise
+    .then<[null, T | B]>((result: T) => {
+      return [null, beautifyReturnValue ? beautifyReturnValue(result) : result];
+    })
+    .catch<[E, null]>((causeOfError: E) => {
+      if (errorCaptured)
+        return [Object.assign(causeOfError, errorCaptured), null];
+      return [causeOfError, null];
+    });
+}
+
 export type catchErrorCb<T> = (errMessage: T) => void;
 /**
  * @description 将错误字符串传入回调
@@ -31,7 +47,7 @@ export function catchError(cb: catchErrorCb<string>): any {
 /**
  * @description 将错误json转为对象,传入回调
  * @param { catchErrorCb } cb  回调函数
- * @returns
+ * @returns { any }
  */
 export function catchErrorJSONParse<T>(cb: catchErrorCb<T>): any {
   return function (
@@ -49,31 +65,37 @@ export function catchErrorJSONParse<T>(cb: catchErrorCb<T>): any {
     };
   };
 }
+/**
+ * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
+ * @param { catchErrorCb } cb 错误回调
+ * @returns { any }
+ */
 export function catchErrorPromise<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value;
+    const args = arguments;
     desc.value = async function () {
       const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(
-        // @ts-ignore
-        fn(...arguments)
+        fn(...args)
       );
       if (err) cb(err);
       return res;
     };
   };
 }
-
+/**
+ * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
+ * @param { catchErrorCb } cb 错误回调
+ * @returns { any }
+ */
 export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>): any {
-  return async function (
-    _: any,
-    key: string,
-    desc: TypedPropertyDescriptor<any>
-  ) {
+  return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value;
+    const args = arguments;
     desc.value = async function () {
       const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(
-        // @ts-ignore
-        fn(...arguments)
+        // //@ts-ignor
+        fn(...args)
       );
       if (err) cb(JSON.parse(err));
       return res;
