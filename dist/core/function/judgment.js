@@ -17,10 +17,8 @@ exports.nonEmptyJudgment = nonEmptyJudgment;
 function replaceObjectProperties(contrast, beforeReplacement, afterReplacement) {
     if (beforeReplacement.length !== afterReplacement.length)
         throw new Error("The length of the replacement attribute does not want to wait");
-    var r = JSON.stringify(contrast);
-    beforeReplacement.forEach(function (beforeItem, beforeIndex) {
-        return (r = r.replace(new RegExp(beforeItem), afterReplacement[beforeIndex]));
-    });
+    let r = JSON.stringify(contrast);
+    beforeReplacement.forEach((beforeItem, beforeIndex) => (r = r.replace(new RegExp(beforeItem), afterReplacement[beforeIndex])));
     return JSON.parse(r);
 }
 exports.replaceObjectProperties = replaceObjectProperties;
@@ -30,7 +28,7 @@ exports.replaceObjectProperties = replaceObjectProperties;
  * @returns { ()=>T }
  */
 function Singleton(fn) {
-    var result = null;
+    let result = null;
     return function () {
         return result ? result : (result = fn());
     };

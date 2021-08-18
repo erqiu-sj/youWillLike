@@ -27,7 +27,7 @@ exports.judgment = exports.base64OrUniCode = void 0;
  * @FilePath     : /you-will-like/src/core/function/index.ts
  * @Description: function all
  */
-var base64OrUniCode = __importStar(require("./encryptionAndDecryption"));
+const base64OrUniCode = __importStar(require("./encryptionAndDecryption"));
 exports.base64OrUniCode = base64OrUniCode;
-var judgment = __importStar(require("./judgment"));
+const judgment = __importStar(require("./judgment"));
 exports.judgment = judgment;

@@ -8,9 +8,6 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.strategistAbstract = void 0;
-var strategistAbstract = /** @class */ (function () {
-    function strategistAbstract() {
-    }
-    return strategistAbstract;
-}());
+class strategistAbstract {
+}
 exports.strategistAbstract = strategistAbstract;

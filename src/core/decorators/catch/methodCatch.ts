@@ -65,37 +65,26 @@ export function catchErrorJSONParse<T>(cb: catchErrorCb<T>): any {
     };
   };
 }
-/**
- * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
- * @param { catchErrorCb } cb 错误回调
- * @returns { any }
- */
+
 export function catchErrorPromise<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value;
-    const args = arguments;
     desc.value = async function () {
       const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(
-        fn(...args)
+        fn(...arguments)
       );
       if (err) cb(err);
       return res;
     };
   };
 }
-/**
- * @description 你不应该往这个装饰器传入任何形参，因为 arguments 无法再异步函数中获取
- * @param { catchErrorCb } cb 错误回调
- * @returns { any }
- */
+
 export function catchErrorPromiseJSONParse<T>(cb: catchErrorCb<T>): any {
   return function (_: any, key: string, desc: TypedPropertyDescriptor<any>) {
     const fn = desc.value;
-    const args = arguments;
     desc.value = async function () {
       const [err, res] = await SynchronizationAwaitError<unknown, unknown, any>(
-        // //@ts-ignor
-        fn(...args)
+        fn(...arguments)
       );
       if (err) cb(JSON.parse(err));
       return res;

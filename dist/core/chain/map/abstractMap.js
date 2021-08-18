@@ -8,9 +8,6 @@ exports.abstractMap = void 0;
  * @FilePath: /you-will-like/src/core/chain/map/abstractMap.ts
  * @Description: 抽象类Map
  */
-var abstractMap = /** @class */ (function () {
-    function abstractMap() {
-    }
-    return abstractMap;
-}());
+class abstractMap {
+}
 exports.abstractMap = abstractMap;

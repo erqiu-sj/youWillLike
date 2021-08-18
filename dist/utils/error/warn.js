@@ -8,11 +8,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.warn = void 0;
-function warn(message) {
-    var optionalParams = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        optionalParams[_i - 1] = arguments[_i];
-    }
+function warn(message, ...optionalParams) {
     console.warn(message, optionalParams);
 }
 exports.warn = warn;

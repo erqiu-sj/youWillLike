@@ -1,17 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.searchBase = void 0;
-var searchBase = /** @class */ (function () {
-    function searchBase() {
-    }
-    searchBase.prototype.initialize = function (value) {
+class searchBase {
+    initialize(value) {
         if (!value)
             return false;
         return true;
-    };
-    searchBase.prototype.has = function (obj, key) {
+    }
+    has(obj, key) {
         return Reflect.has(obj, key);
-    };
-    return searchBase;
-}());
+    }
+}
 exports.searchBase = searchBase;

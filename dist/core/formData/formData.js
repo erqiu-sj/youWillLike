@@ -8,47 +8,46 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormDataHandler = void 0;
-var FormDataHandler = /** @class */ (function () {
-    function FormDataHandler() {
+class FormDataHandler {
+    constructor() {
         this.formData = new FormData();
     }
-    FormDataHandler.prototype.append = function (name, value, fileName) {
+    append(name, value, fileName) {
         if (fileName)
             this.formData.append(name, value, fileName);
         else
             this.formData.append(name, value);
         return this;
-    };
-    FormDataHandler.prototype.delete = function (name) {
+    }
+    delete(name) {
         this.formData.delete(name);
         return this;
-    };
-    FormDataHandler.prototype.get = function (name) {
+    }
+    get(name) {
         return this.formData.get(name);
-    };
-    FormDataHandler.prototype.getAll = function (name) {
+    }
+    getAll(name) {
         return this.formData.getAll(name);
-    };
-    FormDataHandler.prototype.has = function (name) {
+    }
+    has(name) {
         return this.formData.has(name);
-    };
-    FormDataHandler.prototype.set = function (name, value, fileName) {
+    }
+    set(name, value, fileName) {
         if (fileName)
             this.formData.set(name, value, fileName);
         else
             this.formData.set(name, value);
         return this;
-    };
-    FormDataHandler.prototype.forEach = function (callbackFn, thisArg) {
+    }
+    forEach(callbackFn, thisArg) {
         if (thisArg)
             this.formData.forEach(callbackFn, thisArg);
         else
             this.formData.forEach(callbackFn);
         return this;
-    };
-    FormDataHandler.prototype.return = function () {
+    }
+    return() {
         return this.formData;
-    };
-    return FormDataHandler;
-}());
+    }
+}
 exports.FormDataHandler = FormDataHandler;
