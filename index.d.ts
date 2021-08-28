@@ -6,13 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: /you-will-like/index.d.ts
  */
-import {
-  chain,
-  decorators,
-  functions,
-  search,
-  stateMode,
-  strategist,
-} from "./src/index";
+import { chain, decorators, functions, search, stateMode, strategist } from './src/index'
 
-export { chain, decorators, functions, search, stateMode, strategist };
+export { chain, decorators, functions, search, stateMode, strategist }

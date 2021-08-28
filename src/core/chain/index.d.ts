@@ -6,6 +6,6 @@
  * @Description: .d.ts
  */
 
-import { JMap, JSet, JLocalstorage } from "../../../src/core/chain/index";
+import { JMap, JSet, JLocalstorage, ChainOfResponsibility, ChainOfResponsibilityNext } from '../../../src/core/chain/index'
 
-export { JMap, JSet, JLocalstorage };
+export { JMap, JSet, JLocalstorage, ChainOfResponsibility, ChainOfResponsibilityNext }
