@@ -4,8 +4,8 @@ exports.ChainOfResponsibility = exports.ChainOfResponsibilityNext = void 0;
 /**
  * @description 强制执行下一次任务
  */
-function ChainOfResponsibilityNext() {
-    this.loopExecution();
+function ChainOfResponsibilityNext(params) {
+    this.loopExecution(params);
 }
 exports.ChainOfResponsibilityNext = ChainOfResponsibilityNext;
 /**
@@ -27,15 +27,14 @@ class ChainOfResponsibility {
         // ret返回值不为true
         if (!ret)
             return ret;
-        // @ts-ignore
         this.loopExecution();
         return ret;
     }
-    loopExecution() {
+    loopExecution(rewrite) {
         var _a, _b;
-        const cycleCondition = (_b = (_a = this.taskList) === null || _a === void 0 ? void 0 : _a.shift()) === null || _b === void 0 ? void 0 : _b.call(this, this.parameter);
+        const cycleCondition = (_b = (_a = this.taskList) === null || _a === void 0 ? void 0 : _a.shift()) === null || _b === void 0 ? void 0 : _b.call(this, rewrite || this.parameter);
         if (cycleCondition) {
-            this.loopExecution();
+            this.loopExecution(rewrite);
         }
     }
     addChain(fn) {
@@ -48,19 +47,3 @@ class ChainOfResponsibility {
     }
 }
 exports.ChainOfResponsibility = ChainOfResponsibility;
-function A(num) {
-    console.log(1, num);
-    return '1';
-}
-function B(num) {
-    console.log(2, num);
-    // @ts-ignore
-    ChainOfResponsibilityNext.call(this);
-    return false;
-}
-function C(num) {
-    console.log('3', num);
-    return false;
-}
-const re = new ChainOfResponsibility(B, 1).addChain(C).addChain(A);
-re.dispatch(2);

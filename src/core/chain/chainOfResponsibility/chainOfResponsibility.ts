@@ -2,8 +2,8 @@ import { ChainOfResponsibilityTypes } from './type'
 /**
  * @description 强制执行下一次任务
  */
-export function ChainOfResponsibilityNext() {
-  this.loopExecution()
+export function ChainOfResponsibilityNext<R>(params?: R) {
+  this.loopExecution(params)
 }
 /**
  *  @description 责任链模式
@@ -24,14 +24,13 @@ export class ChainOfResponsibility<T> implements ChainOfResponsibilityTypes {
     if (!this.taskList?.length) return ret
     // ret返回值不为true
     if (!ret) return ret
-    // @ts-ignore
     this.loopExecution()
     return ret
   }
-  private loopExecution() {
-    const cycleCondition = this.taskList?.shift()?.call(this, this.parameter)
+  private loopExecution<R>(rewrite?: R) {
+    const cycleCondition = this.taskList?.shift()?.call(this, rewrite || this.parameter)
     if (cycleCondition) {
-      this.loopExecution()
+      this.loopExecution(rewrite)
     }
   }
   addChain(fn: Function) {
@@ -42,19 +41,3 @@ export class ChainOfResponsibility<T> implements ChainOfResponsibilityTypes {
     this.parameter = params
   }
 }
-function A(num: number) {
-  console.log(1, num)
-  return '1'
-}
-function B(num: number) {
-  console.log(2, num)
-  // @ts-ignore
-  ChainOfResponsibilityNext.call(this)
-  return false
-}
-function C(num: number) {
-  console.log('3', num)
-  return false
-}
-const re = new ChainOfResponsibility(B, 1).addChain(C).addChain(A)
-re.dispatch(2)
