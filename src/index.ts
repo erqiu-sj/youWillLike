@@ -12,5 +12,7 @@ import * as functions from './core/function'
 import * as search from './core/search'
 import * as stateMode from './core/stateMode'
 import * as strategist from './core/strategist'
+import * as Utils from './utils/index'
 
-export { chain, decorators, functions, search, stateMode, strategist }
+export { chain, decorators, functions, search, stateMode, strategist, Utils }
+

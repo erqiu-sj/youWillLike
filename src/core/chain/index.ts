@@ -7,8 +7,8 @@
  */
 
 import { JLocalstorage } from './localstoreage/localstorage'
-import { ChainOfResponsibility, ChainOfResponsibilityNext } from './chainOfResponsibility/chainOfResponsibility'
+import { ChainOfResponsibility, ChainOfResponsibilityNext, StopBackwardExecution } from './chainOfResponsibility/chainOfResponsibility'
 import { JMap } from './map/map'
 import { JSet } from './set/set'
 
-export { JMap, JSet, JLocalstorage, ChainOfResponsibility, ChainOfResponsibilityNext }
+export { JMap, JSet, JLocalstorage, ChainOfResponsibility, ChainOfResponsibilityNext, StopBackwardExecution }

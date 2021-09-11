@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.strategist = exports.stateMode = exports.search = exports.functions = exports.decorators = exports.chain = void 0;
+exports.Utils = exports.strategist = exports.stateMode = exports.search = exports.functions = exports.decorators = exports.chain = void 0;
 /*
  * @Author: your name
  * @Date: 2021-08-16 12:46:23
@@ -40,3 +40,5 @@ const stateMode = __importStar(require("./core/stateMode"));
 exports.stateMode = stateMode;
 const strategist = __importStar(require("./core/strategist"));
 exports.strategist = strategist;
+const Utils = __importStar(require("./utils/index"));
+exports.Utils = Utils;

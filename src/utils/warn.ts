@@ -7,5 +7,5 @@
  */
 
 export function warn(message: string, ...optionalParams: any[]) {
-	console.warn(message, optionalParams);
+  console.warn(message, optionalParams)
 }
