@@ -1,13 +1,15 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.interval = exports.TimeOut = void 0;
 /*
  * @Author: 邱狮杰
  * @Date: 2021-07-25 13:13:56
@@ -19,35 +21,25 @@ function TimeOut(time) {
     return (target, key, desc) => {
         const fn = desc.value;
         desc.value = function () {
-            const timeOutId = setTimeout(fn.bind(this, ...arguments, () => {
-                clearTimeout(timeOutId);
-            }), time);
+            return __awaiter(this, arguments, void 0, function* () {
+                const timeOutId = setTimeout(yield fn.bind(this, ...arguments, () => {
+                    clearTimeout(timeOutId);
+                }), time);
+            });
         };
     };
 }
+exports.TimeOut = TimeOut;
 function interval(time) {
     return (target, key, desc) => {
         const fn = desc.value;
         desc.value = function () {
-            const timeOutId = setInterval(fn.bind(this, ...arguments, () => {
-                clearInterval(timeOutId);
-            }), time);
+            return __awaiter(this, arguments, void 0, function* () {
+                const timeOutId = setInterval(yield fn.bind(this, ...arguments, () => {
+                    clearInterval(timeOutId);
+                }), time);
+            });
         };
     };
 }
-class T {
-    constructor() {
-        this.a = 1;
-    }
-    s(n, two, t) {
-        console.log(n, two, "what", this.a);
-        t === null || t === void 0 ? void 0 : t();
-    }
-}
-__decorate([
-    interval(1000),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number, Function]),
-    __metadata("design:returntype", void 0)
-], T.prototype, "s", null);
-new T().s(1, 2);
+exports.interval = interval;

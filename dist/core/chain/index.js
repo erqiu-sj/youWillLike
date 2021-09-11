@@ -7,12 +7,13 @@
  * @Description: entry
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChainOfResponsibilityNext = exports.ChainOfResponsibility = exports.JLocalstorage = exports.JSet = exports.JMap = void 0;
+exports.StopBackwardExecution = exports.ChainOfResponsibilityNext = exports.ChainOfResponsibility = exports.JLocalstorage = exports.JSet = exports.JMap = void 0;
 const localstorage_1 = require("./localstoreage/localstorage");
 Object.defineProperty(exports, "JLocalstorage", { enumerable: true, get: function () { return localstorage_1.JLocalstorage; } });
 const chainOfResponsibility_1 = require("./chainOfResponsibility/chainOfResponsibility");
 Object.defineProperty(exports, "ChainOfResponsibility", { enumerable: true, get: function () { return chainOfResponsibility_1.ChainOfResponsibility; } });
 Object.defineProperty(exports, "ChainOfResponsibilityNext", { enumerable: true, get: function () { return chainOfResponsibility_1.ChainOfResponsibilityNext; } });
+Object.defineProperty(exports, "StopBackwardExecution", { enumerable: true, get: function () { return chainOfResponsibility_1.StopBackwardExecution; } });
 const map_1 = require("./map/map");
 Object.defineProperty(exports, "JMap", { enumerable: true, get: function () { return map_1.JMap; } });
 const set_1 = require("./set/set");

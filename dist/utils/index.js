@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Error = exports.Exec = exports.property = exports.URL = void 0;
+exports.Os = exports.Error = exports.Exec = exports.property = exports.URL = void 0;
 const URL = __importStar(require("./URL"));
 exports.URL = URL;
 const Exec = __importStar(require("./exec"));
@@ -28,3 +28,5 @@ const property = __importStar(require("./property"));
 exports.property = property;
 const Error = __importStar(require("./warn"));
 exports.Error = Error;
+const Os = __importStar(require("./os"));
+exports.Os = Os;

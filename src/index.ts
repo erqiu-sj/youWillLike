@@ -15,4 +15,3 @@ import * as strategist from './core/strategist'
 import * as Utils from './utils/index'
 
 export { chain, decorators, functions, search, stateMode, strategist, Utils }
-
