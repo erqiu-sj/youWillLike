@@ -1,9 +1,9 @@
 {
   "name": "youwilllike",
-  "version": "1.3.3",
+  "version": "1.3.5",
   "description": "tools",
-  "main": "/dist/index.js",
-  "module": "/dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./index.d.ts",
   "scripts": {},
   "repository": {
